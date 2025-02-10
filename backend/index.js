@@ -3,13 +3,13 @@ const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 
 app.get('/giveaways', async (req, res) => {
   try {
-    const response = await axios.get('https://www.gamerpower.com/api/giveaways');
+    const response = await axios.get(process.env.GAMERPOWER_API_URL);
     res.json(response.data);
   } catch (error) {
     console.error(error);

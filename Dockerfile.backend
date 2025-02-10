@@ -1,6 +1,9 @@
 # Backend service
 FROM node:20-alpine
 
+ENV PORT=3001
+ENV GAMERPOWER_API_URL=https://www.gamerpower.com/api/giveaways
+
 WORKDIR /app
 
 # Copy package files

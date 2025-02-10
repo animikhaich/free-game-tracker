@@ -16,6 +16,8 @@ interface Game {
   end_date: string;
   users: number;
   status: string;
+  worthNumber?: number;
+  endDateTime?: number;
 }
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('http://localhost:3003/giveaways');
+        console.log(import.meta.env.VITE_BACKEND_URL);
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/giveaways');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -50,11 +53,11 @@ function App() {
 
         // Get top 3 games by worth and earliest end date
         const topGames = [...paidGames]
-          .sort((a, b) => {
-            if (b.worthNumber === a.worthNumber) {
-              return a.endDateTime - b.endDateTime;
+          .sort((a: Game, b: Game) => {
+            if ((b.worthNumber ?? 0) === (a.worthNumber ?? 0)) {
+              return (a.endDateTime ?? 0) - (b.endDateTime ?? 0);
             }
-            return b.worthNumber - a.worthNumber;
+            return (b.worthNumber ?? 0) - (a.worthNumber ?? 0);
           })
           .slice(0, 3);
 
@@ -108,9 +111,9 @@ function App() {
     );
   };
 
-  const filterGames = (games: Game[]) => {
+  const filterGames = (games: Game[]): Game[] => {
     if (selectedPlatforms.length === 0) return games;
-    return games.filter(game =>
+    return games.filter((game: Game) =>
       selectedPlatforms.some(platform =>
         game.platforms.toLowerCase().includes(platform.toLowerCase())
       )
