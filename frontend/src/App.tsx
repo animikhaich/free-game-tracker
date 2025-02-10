@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ExternalLink, Gift, Clock, Users, GamepadIcon, Flame, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface Game {
@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('https://api.allorigins.win/raw?url=https://www.gamerpower.com/api/giveaways');
+        const response = await fetch('http://localhost:3003/giveaways');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
