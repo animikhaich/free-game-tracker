@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.gamerpower.com/api/giveaways'));
+        const response = await fetch('https://api.allorigins.win/raw?url=https://www.gamerpower.com/api/giveaways');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
