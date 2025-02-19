@@ -1,7 +1,7 @@
 # Build stage
 FROM node:20-alpine AS build
 
-ENV VITE_BACKEND_URL=https://freegametracker.animikh.me:3003
+ENV VITE_BACKEND_URL=https://freegametracker.animikh.me
 
 # Set working directory
 WORKDIR /app
